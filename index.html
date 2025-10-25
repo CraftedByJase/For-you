@@ -6,15 +6,16 @@
   <title>Crafted by Jase - Health & Fitness Blog</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #2c2c2c; background: linear-gradient(135deg, #1a365d 0%, #2c2c2c 100%); min-height: 100vh; }
     .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-    header { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 2rem; text-align: center; }
-    h1 { color: #667eea; font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700; }
-    .subtitle { color: #666; font-size: 1.2rem; font-weight: 400; }
-    .filter-bar { background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
-    .filter-btn { padding: 0.7rem 1.5rem; border: none; border-radius: 8px; background: #f0f0ff; color: #4a4a8a; cursor: pointer; transition: all 0.2s ease; font-weight: 500; }
-    .filter-btn:hover { background: #e0e0ff; }
-    .filter-btn.active { background: #667eea; color: white; }
+    header { background: #f4f8f3; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+    .logo { max-width: 150px; height: auto; margin-bottom: 0.5rem; }
+    h1 { color: #1a365d; font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700; }
+    .subtitle { color: #475569; font-size: 1.2rem; font-weight: 400; }
+    .filter-bar { background: #f4f8f3; padding: 1.5rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .filter-btn { padding: 0.7rem 1.5rem; border: none; border-radius: 8px; background: #e8ede7; color: #2c2c2c; cursor: pointer; transition: all 0.2s ease; font-weight: 500; }
+    .filter-btn:hover { background: #d4dcd3; }
+    .filter-btn.active { background: #1a365d; color: #fbff34; }
     
     /* Updated Articles Grid - Fitt Insider Style */
     .articles-grid { 
@@ -26,7 +27,7 @@
     
     /* Updated Article Card - Fitt Insider Style */
     .article-card { 
-      background: white; 
+      background: #f4f8f3; 
       border-radius: 12px; 
       padding: 2rem; 
       box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
@@ -41,7 +42,7 @@
     
     .article-card:hover { 
       transform: translateY(-4px); 
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15); 
+      box-shadow: 0 8px 24px rgba(26,54,93,0.2); 
     }
     
     /* Centered Icon */
@@ -54,8 +55,8 @@
     .category-tag { 
       display: inline-block; 
       font-size: 0.7rem; 
-      background: #eef2ff; 
-      color: #4f46e5; 
+      background: #1a365d; 
+      color: #fbff34; 
       padding: 0.3rem 0.75rem; 
       border-radius: 999px; 
       width: fit-content; 
@@ -67,7 +68,7 @@
     /* Bold Title */
     .article-title { 
       font-size: 1.25rem; 
-      color: #111; 
+      color: #2c2c2c; 
       font-weight: 700;
       line-height: 1.4;
       margin-top: 0.25rem;
@@ -76,7 +77,7 @@
     /* Lighter Metadata on Separate Line */
     .article-meta { 
       font-size: 0.8rem; 
-      color: #888; 
+      color: #475569; 
       font-weight: 400;
       margin-top: -0.25rem;
     }
@@ -84,7 +85,7 @@
     /* Excerpt at Bottom */
     .article-excerpt { 
       font-size: 0.9rem; 
-      color: #555; 
+      color: #2c2c2c; 
       line-height: 1.5;
       margin-top: auto;
       font-weight: 400;
@@ -118,15 +119,17 @@
     }
     
     /* Modal */
-    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); padding: 20px; z-index: 1000; }
-    .modal-content { background: white; max-width: 860px; margin: 40px auto; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
-    .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-bottom: 1px solid #eee; }
+    .modal { display: none; position: fixed; inset: 0; background: rgba(26,54,93,0.6); padding: 20px; z-index: 1000; }
+    .modal-content { background: #f4f8f3; max-width: 860px; margin: 40px auto; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-bottom: 1px solid #475569; }
     .modal-body { padding: 1.25rem; max-height: 70vh; overflow-y: auto; }
-    .close-btn { background: transparent; border: none; font-size: 1.5rem; cursor: pointer; }
-    .modal-body h2 { margin-bottom: 0.5rem; color: #111; font-weight: 700; }
-    .modal-body h3 { margin-top: 1rem; margin-bottom: 0.5rem; color: #333; font-weight: 600; }
-    .modal-body p { margin: 0.6rem 0; }
+    .close-btn { background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: #2c2c2c; }
+    .modal-body h2 { margin-bottom: 0.5rem; color: #1a365d; font-weight: 700; }
+    .modal-body h3 { margin-top: 1rem; margin-bottom: 0.5rem; color: #2c2c2c; font-weight: 600; }
+    .modal-body p { margin: 0.6rem 0; color: #2c2c2c; }
     .modal-body ul { margin: 0.6rem 1rem; padding-left: 1rem; }
+    .modal-body a { color: #1a365d; text-decoration: underline; }
+    .modal-body a:hover { color: #fbff34; background: #1a365d; }
   </style>
 </head>
 <body>
@@ -150,7 +153,7 @@
   <div class="modal" id="articleModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Article Details</h2>
+        <strong>Article Details</strong>
         <button class="close-btn" onclick="closeModal()">×</button>
       </div>
       <div class="modal-body" id="modalBody"></div>
