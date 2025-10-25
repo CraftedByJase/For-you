@@ -1,49 +1,341 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crafted by Jase - Health & Fitness Blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<!-- truncated: existing top content remains -->
-<script>
-// ... other JS ...
-const articles = [
-  {
-    id: 1,
-    title: "Building Resilient Movement Patterns",
-    excerpt: "Discover how proper movement patterns can prevent injury and enhance performance across all aspects of life.",
-    category: "rehab",
-    author: "Jase Porter",
-    date: "2025-10-20",
-    url: "#",
-    content: `Building Resilient Movement Patterns
-Health & Fitness | Rehab & Prehab, Updated for 2025 | By Jase Porter
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
 
-Why Movement Patterns Matter
-Movement quality is the foundation of performance and injury prevention. As a coach certified by The Ready State, 102 Movement & Mobility, and Pain Free Performance Specialist (PPSC), I use the latest functional assessments and corrective protocols endorsed by leaders like Kelly Starrett and Dr. John Rusin. Poor patterns lead to joint pain and dysfunction, while resilient movement fortifies tissue health and athletic longevity.
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-The Seven Fundamental Patterns (PPSC & Ready State)
-- Squat: Lower body power, everyday tasks
-- Hinge: Posterior chain, picking up objects
-- Lunge: Single-leg stability, gait mechanics
-- Push: Upper body pressing
-- Pull: Back strength, posture
-- Carry: Core and grip strength for daily loads
-- Rotation: Safe twisting, anti-rotation stability
+        header {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
 
-How to Build Resilience
-- Master the basics first. Start with bodyweight; progress gradually.
-- Assess movement regularly. Use coach-led screens (FRC, Ready State Mobility 101) to spot and fix compensation early.
-- Integrate mobility, not just flexibility. Active control is more protective than passive range.
-- Use loaded carries, anti-rotation, and multi-planar drills. Research shows these build whole-body resilience for tactical, farm, and athletic populations.
+        h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
 
-Learn More
-- Read The Ready State’s Mobility 101 Guides: https://thereadystate.com/product/movement-and-mobility-101-102-bundle-october-2025/
-- See Pain Free Performance Science by Dr. Rusin: https://drjohnrusin.com/ppsc/
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+        }
 
-Call to Action
-Ready for a free movement assessment? Book a consult now: https://craftedbyjase.setmore.com/
-Want weekly updates with advanced drills, guides, and exclusive coaching tips? Subscribe below and join the #MovementResilience community!
+        .filter-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
 
-Let me know if you'd like any visual graphics, downloadable PDF routines, or additional interactivity for this article, and I'll continue to the next one (“Nutrition for Tactical Athletes”) with the same level of detail. Each post will closely integrate your certifications, state-of-the-art research, relevant links, and sign-up prompts so readers engage, return, and convert to your newsletter and services. Would you like highlights for sharing on social media included too?`
-  },
-  // ... remaining articles ...
-];
-// ... rest of JS ...
-</script>
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .article-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-title {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-meta {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-excerpt {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .category-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: #f0f0f0;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 3rem;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+
+        .modal-content h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content h3 {
+            color: #764ba2;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .modal-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .modal-content ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-content a {
+            color: #667eea;
+            text-decoration: none;
+            border-bottom: 2px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .modal-content a:hover {
+            color: #764ba2;
+            border-bottom-color: #764ba2;
+        }
+
+        @media (max-width: 768px) {
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .modal-content {
+                margin: 20px;
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏋️ Crafted by Jase</h1>
+            <p class="subtitle">Your Guide to Health, Fitness & Resilient Living</p>
+        </header>
+
+        <div class="filter-bar">
+            <button class="filter-btn active" data-category="all">All Posts</button>
+            <button class="filter-btn" data-category="nutrition">Nutrition</button>
+            <button class="filter-btn" data-category="training">Training</button>
+            <button class="filter-btn" data-category="rehab">Rehab & Prehab</button>
+            <button class="filter-btn" data-category="tactical">Tactical Fitness</button>
+        </div>
+
+        <div class="articles-grid" id="articlesGrid"></div>
+    </div>
+
+    <div class="modal" id="articleModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // ... other JS ...
+        const articles = [
+            {
+                id: 1,
+                title: "Building Resilient Movement Patterns",
+                category: "rehab",
+                date: "2025-10-19",
+                excerpt: "Discover how proper movement patterns can prevent injury and enhance performance across all aspects of life.",
+                icon: "🏃",
+                author: "Jase Porter",
+                content: `
+                    <h2>Building Resilient Movement Patterns</h2>
+                    <h3>Why Movement Patterns Matter</h3>
+                    <p>Movement quality is the foundation of performance and injury prevention. As a coach certified by The Ready State, 102 Movement & Mobility, and Pain Free Performance Specialist (PPSC), I use the latest functional assessments and corrective protocols endorsed by leaders like Kelly Starrett and Dr. John Rusin. Poor patterns lead to joint pain and dysfunction, while resilient movement fortifies tissue health and athletic longevity.</p>
+                    <h3>The Seven Fundamental Patterns (PPSC & Ready State)</h3>
+                    <ul>
+                        <li><strong>Squat:</strong> Lower body power, everyday tasks</li>
+                        <li><strong>Hinge:</strong> Posterior chain, picking up objects</li>
+                        <li><strong>Lunge:</strong> Single-leg stability, gait mechanics</li>
+                        <li><strong>Push:</strong> Upper body pressing</li>
+                        <li><strong>Pull:</strong> Back strength, posture</li>
+                        <li><strong>Carry:</strong> Core and grip strength for daily loads</li>
+                        <li><strong>Rotation:</strong> Safe twisting, anti-rotation stability</li>
+                    </ul>
+                    <h3>How to Build Resilience</h3>
+                    <ul>
+                        <li>Master the basics first. Start with bodyweight; progress gradually.</li>
+                        <li>Assess movement regularly. Use coach-led screens (FRC, Ready State Mobility 101) to spot and fix compensation early.</li>
+                        <li>Integrate mobility, not just flexibility. Active control is more protective than passive range.</li>
+                        <li>Use loaded carries, anti-rotation, and multi-planar drills. Research shows these build whole-body resilience for tactical, farm, and athletic populations.</li>
+                    </ul>
+                    <h3>Learn More</h3>
+                    <ul>
+                        <li><a href="https://thereadystate.com/product/movement-and-mobility-101-102-bundle-october-2025/" target="_blank">Read The Ready State's Mobility 101 Guides</a></li>
+                        <li><a href="https://drjohnrusin.com/ppsc/" target="_blank">See Pain Free Performance Science by Dr. Rusin</a></li>
+                    </ul>
+                    <h3>Call to Action</h3>
+                    <p>
+                        Ready for a free movement assessment? <a href="https://craftedbyjase.setmore.com/" target="_blank">Book a consult</a> now—let's identify and fix your barriers to pain-free living!<br>
+                        Want weekly updates with advanced drills, guides, and exclusive coaching tips? Subscribe below and join the #MovementResilience community!
+                    </p>
+                `
+            },
+            // ... remaining articles ...
+        ];
+        // ... rest of JS ...
+
+        function renderArticles(category = 'all') {
+            const grid = document.getElementById('articlesGrid');
+            const filtered = category === 'all' 
+                ? articles 
+                : articles.filter(a => a.category === category);
+            
+            grid.innerHTML = filtered.map(article => `
+                <div class="article-card" onclick="openModal(${article.id})">
+                    <div class="article-icon">${article.icon}</div>
+                    <span class="category-tag">${article.category}</span>
+                    <h2 class="article-title">${article.title}</h2>
+                    <div class="article-meta">${article.author} • ${article.date}</div>
+                    <p class="article-excerpt">${article.excerpt}</p>
+                </div>
+            `).join('');
+        }
+
+        function openModal(id) {
+            const article = articles.find(a => a.id === id);
+            document.getElementById('modalBody').innerHTML = article.content;
+            document.getElementById('articleModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('articleModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderArticles(this.dataset.category);
+            });
+        });
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('articleModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        renderArticles();
+    </script>
+</body>
+</html>
