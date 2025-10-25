@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -10,130 +9,195 @@
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
     .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
     header { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 2rem; text-align: center; }
-    h1 { color: #667eea; font-size: 2.5rem; margin-bottom: 0.5rem; }
-    .subtitle { color: #666; font-size: 1.2rem; }
+    h1 { color: #667eea; font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700; }
+    .subtitle { color: #666; font-size: 1.2rem; font-weight: 400; }
     .filter-bar { background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
-    .filter-btn { padding: 0.7rem 1.5rem; border: none; border-radius: 8px; background: #f0f0ff; color: #4a4a8a; cursor: pointer; transition: all 0.2s ease; }
+    .filter-btn { padding: 0.7rem 1.5rem; border: none; border-radius: 8px; background: #f0f0ff; color: #4a4a8a; cursor: pointer; transition: all 0.2s ease; font-weight: 500; }
     .filter-btn:hover { background: #e0e0ff; }
     .filter-btn.active { background: #667eea; color: white; }
-    .articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
-    .article-card { background: white; border-radius: 14px; padding: 1.2rem; box-shadow: 0 6px 20px rgba(0,0,0,0.12); cursor: pointer; display: flex; flex-direction: column; gap: 0.6rem; border: 1px solid rgba(0,0,0,0.05); }
-    .article-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.14); }
-    .article-icon { font-size: 2rem; }
-    .category-tag { display: inline-block; font-size: 0.75rem; background: #eef2ff; color: #4f46e5; padding: 0.25rem 0.5rem; border-radius: 999px; width: fit-content; }
-    .article-title { font-size: 1.2rem; color: #222; }
-    .article-meta { font-size: 0.85rem; color: #666; }
-    .article-excerpt { font-size: 0.95rem; color: #444; }
+    
+    /* Updated Articles Grid - Fitt Insider Style */
+    .articles-grid { 
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 2rem; 
+      margin-bottom: 3rem;
+    }
+    
+    /* Updated Article Card - Fitt Insider Style */
+    .article-card { 
+      background: white; 
+      border-radius: 12px; 
+      padding: 2rem; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
+      cursor: pointer; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 0.75rem; 
+      border: 1px solid rgba(0,0,0,0.06); 
+      transition: all 0.3s ease;
+      min-height: 280px;
+    }
+    
+    .article-card:hover { 
+      transform: translateY(-4px); 
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15); 
+    }
+    
+    /* Centered Icon */
+    .article-icon { 
+      font-size: 2.5rem; 
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .category-tag { 
+      display: inline-block; 
+      font-size: 0.7rem; 
+      background: #eef2ff; 
+      color: #4f46e5; 
+      padding: 0.3rem 0.75rem; 
+      border-radius: 999px; 
+      width: fit-content; 
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Bold Title */
+    .article-title { 
+      font-size: 1.25rem; 
+      color: #111; 
+      font-weight: 700;
+      line-height: 1.4;
+      margin-top: 0.25rem;
+    }
+    
+    /* Lighter Metadata on Separate Line */
+    .article-meta { 
+      font-size: 0.8rem; 
+      color: #888; 
+      font-weight: 400;
+      margin-top: -0.25rem;
+    }
+    
+    /* Excerpt at Bottom */
+    .article-excerpt { 
+      font-size: 0.9rem; 
+      color: #555; 
+      line-height: 1.5;
+      margin-top: auto;
+      font-weight: 400;
+    }
+    
+    /* Responsive Design for Mobile */
+    @media (max-width: 968px) {
+      .articles-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .articles-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      
+      .article-card {
+        padding: 1.5rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+      }
+    }
+    
     /* Modal */
     .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); padding: 20px; z-index: 1000; }
     .modal-content { background: white; max-width: 860px; margin: 40px auto; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
     .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-bottom: 1px solid #eee; }
-    .modal-body { padding: 1.25rem; }
+    .modal-body { padding: 1.25rem; max-height: 70vh; overflow-y: auto; }
     .close-btn { background: transparent; border: none; font-size: 1.5rem; cursor: pointer; }
-    .modal-body h2 { margin-bottom: 0.5rem; color: #111; }
-    .modal-body h3 { margin-top: 1rem; margin-bottom: 0.5rem; color: #333; }
+    .modal-body h2 { margin-bottom: 0.5rem; color: #111; font-weight: 700; }
+    .modal-body h3 { margin-top: 1rem; margin-bottom: 0.5rem; color: #333; font-weight: 600; }
     .modal-body p { margin: 0.6rem 0; }
     .modal-body ul { margin: 0.6rem 1rem; padding-left: 1rem; }
-    .modal-body li { margin: 0.35rem 0; }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>Crafted by Jase</h1>
-      <p class="subtitle">Health, Fitness, Mobility, and Functional Performance</p>
+      <h1>🏋️ Crafted by Jase</h1>
+      <p class="subtitle">Your guide to fitness, training, and recovery</p>
     </header>
-
+    
     <div class="filter-bar">
       <button class="filter-btn active" data-category="all">All</button>
-      <button class="filter-btn" data-category="health">Health</button>
-      <button class="filter-btn" data-category="fitness">Fitness</button>
-      <button class="filter-btn" data-category="mobility">Mobility</button>
+      <button class="filter-btn" data-category="nutrition">Nutrition</button>
+      <button class="filter-btn" data-category="training">Training</button>
+      <button class="filter-btn" data-category="recovery">Recovery</button>
       <button class="filter-btn" data-category="mindset">Mindset</button>
     </div>
-
-    <section class="articles-grid" id="articlesGrid"></section>
-
-    <div id="articleModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <strong>Article</strong>
-          <button class="close-btn" onclick="closeModal()">×</button>
-        </div>
-        <div id="modalBody" class="modal-body"></div>
+    
+    <div class="articles-grid" id="articlesGrid"></div>
+  </div>
+  
+  <div class="modal" id="articleModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Article Details</h2>
+        <button class="close-btn" onclick="closeModal()">×</button>
       </div>
+      <div class="modal-body" id="modalBody"></div>
     </div>
   </div>
-
+  
   <script>
     const articles = [
       {
         id: 1,
-        title: "Foundations of Functional Fitness",
-        category: "fitness",
-        date: "2025-10-01",
-        excerpt: "A practical blueprint to build durable strength, capacity, and movement literacy.",
-        icon: "🏋️‍♂️",
-        author: "Jase Porter",
+        category: 'recovery',
+        icon: '🧘',
+        title: 'The Art of Active Recovery',
+        author: 'Jase',
+        date: 'Jan 15, 2025',
+        excerpt: 'Learn why rest days are just as important as training days, and how to maximize your recovery.',
         content: `
-          <h2>Foundations of Functional Fitness</h2>
-          <p>The core of functional fitness is not about chasing numbers—it's about building a capable, resilient human. Start with movement quality, then add load, speed, and complexity.</p>
+          <h2>The Art of Active Recovery</h2>
+          <p><strong>Why Recovery Matters More Than You Think</strong></p>
+          <p>Many athletes focus solely on training intensity, but recovery is where the magic happens. Your muscles don't grow during workouts—they grow during rest.</p>
+          <h3>Active Recovery Techniques</h3>
           <ul>
-            <li>Master the basics: squat, hinge, push, pull, carry.</li>
-            <li>Train across planes: sagittal, frontal, transverse.</li>
-            <li>Blend strength, aerobic base, and mobility work.</li>
+            <li>Light yoga or stretching (20-30 minutes)</li>
+            <li>Low-intensity cardio (walking, swimming)</li>
+            <li>Foam rolling and massage</li>
+            <li>Proper sleep (7-9 hours)</li>
+          </ul>
+          <h3>Recovery Nutrition</h3>
+          <p>Focus on anti-inflammatory foods like:</p>
+          <ul>
+            <li>Fatty fish (salmon, mackerel)</li>
+            <li>Berries and leafy greens</li>
+            <li>Nuts and seeds</li>
+            <li>Quality protein sources</li>
+          </ul>
+          <h3>Further Reading</h3>
+          <ul>
+            <li><a href="https://thereadystate.com/blogs/welcome-to-the-ready-state/" target="_blank">Ready State Blog</a> on mobility and recovery</li>
+            <li><a href="https://www.ptpioneer.com/personal-training/certifications/study/periodization/" target="_blank">Guide to Periodization Science</a></li>
           </ul>
           <h3>Call to Action</h3>
-          <p>
-            Ready for a free movement assessment? <a href="https://craftedbyjase.setmore.com/" target="_blank">Book a consult</a> now—let's identify and fix your barriers to pain-free living!<br/>
-            Want weekly updates with advanced drills, guides, and exclusive coaching tips? Subscribe below and join the #MovementResilience community!
-          </p>
-        `
-      },
-
-      {
-        id: 3,
-        title: "The Science of Recovery",
-        category: "fitness",
-        date: "2025-10-14",
-        excerpt: "Understanding the physiological and psychological aspects of effective recovery strategies.",
-        icon: "🛌",
-        author: "Jase Porter",
-        content: `
-            <h2>The Science of Recovery</h2>
-            <h3>Why Recovery Matters</h3>
-            <p>Recovery is when progress happens. Every workout, adventure, or mission only triggers adaptation if recovery is prioritized. Modern science now recognizes recovery as the linchpin of long-term health, resilience, and performance.</p>
-            <h3>Evidence-Based Strategies</h3>
-            <ul>
-                <li><strong>Active Recovery:</strong> Incorporate low-intensity walking, cycling, or mobility work on rest days.</li>
-                <li><strong>Mobility & Soft Tissue:</strong> Use tools like foam rollers or The Ready State protocols for targeted self-care.</li>
-                <li><strong>Sleep Optimization:</strong> Aim for 7–9 hours per night. Establish wind-down routines to maximize deep rest.</li>
-                <li><strong>Nutrition:</strong> Refuel with protein and healthy carbs after training; add antioxidant-rich foods for cellular repair.</li>
-                <li><strong>Mindful Rest:</strong> Add short breathing exercises, meditation, or mindful immersion (nature Rx) to support nervous system reset.</li>
-            </ul>
-            <h3>Pro Tips & Science Updates</h3>
-            <ul>
-                <li>Alternate hot and cold for muscle recovery (contrast bathing).</li>
-                <li>Track soreness levels with simple daily logs or phone apps.</li>
-                <li>Stretch, roll, or move gently for 5–10 minutes before bed.</li>
-            </ul>
-            <h3>Recommended Resources</h3>
-            <ul>
-                <li><a href="https://thereadystate.com/blogs/welcome-to-the-ready-state/" target="_blank">Ready State Blog</a> on mobility and recovery</li>
-                <li><a href="https://www.ptpioneer.com/personal-training/certifications/study/periodization/" target="_blank">Guide to Periodization Science</a></li>
-            </ul>
-            <h3>Call to Action</h3>
-            <p>
-                Need help building your ideal recovery routine? <a href="https://craftedbyjase.setmore.com/" target="_blank">Start with a coaching call</a>.<br>
-                Subscribe for pro recovery tips, challenges, and exclusive offers for your next 21-Day Reset.
-            </p>
+          <p>Need help building your ideal recovery routine? <a href="https://craftedbyjase.setmore.com/" target="_blank">Start with a coaching call</a>.</p>
+          <p>Subscribe for pro recovery tips, challenges, and exclusive offers for your next 21-Day Reset.</p>
         `
       }
-
-      // ... remaining articles ...
     ];
-
-    // Rendering
+    
     function renderArticles(category = 'all') {
       const grid = document.getElementById('articlesGrid');
       const filtered = category === 'all' ? articles : articles.filter(a => a.category === category);
@@ -142,24 +206,24 @@
           <div class="article-icon">${article.icon}</div>
           <span class="category-tag">${article.category}</span>
           <h2 class="article-title">${article.title}</h2>
-          <div class="article-meta">${article.author} • ${article.date}</div>
+          <div class="article-meta">${article.date}</div>
           <p class="article-excerpt">${article.excerpt}</p>
         </div>
       `).join('');
     }
-
+    
     function openModal(id) {
       const article = articles.find(a => a.id === id);
       document.getElementById('modalBody').innerHTML = article.content;
       document.getElementById('articleModal').style.display = 'block';
       document.body.style.overflow = 'hidden';
     }
-
+    
     function closeModal() {
       document.getElementById('articleModal').style.display = 'none';
       document.body.style.overflow = 'auto';
     }
-
+    
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -167,12 +231,12 @@
         renderArticles(this.dataset.category);
       });
     });
-
+    
     window.onclick = function(event) {
       const modal = document.getElementById('articleModal');
       if (event.target === modal) { closeModal(); }
     }
-
+    
     renderArticles();
   </script>
 </body>
