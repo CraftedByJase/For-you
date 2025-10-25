@@ -1,341 +1,179 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crafted by Jase - Health & Fitness Blog</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        h1 {
-            color: #667eea;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .subtitle {
-            color: #666;
-            font-size: 1.2rem;
-        }
-
-        .filter-bar {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .filter-btn {
-            padding: 0.7rem 1.5rem;
-            border: 2px solid #667eea;
-            background: white;
-            color: #667eea;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: #667eea;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .article-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .article-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .article-title {
-            color: #667eea;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .article-meta {
-            color: #999;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .article-excerpt {
-            color: #666;
-            line-height: 1.8;
-        }
-
-        .category-tag {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            background: #f0f0f0;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-            color: #667eea;
-            font-weight: 600;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            background: white;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 3rem;
-            border-radius: 15px;
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #999;
-            transition: color 0.3s ease;
-        }
-        
-        .close-modal:hover {
-            color: #333;
-        }
-
-        .modal-content h2 {
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        .modal-content h3 {
-            color: #764ba2;
-            margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .modal-content p {
-            margin-bottom: 1rem;
-            line-height: 1.8;
-        }
-
-        .modal-content ul {
-            margin-left: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .modal-content li {
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-content a {
-            color: #667eea;
-            text-decoration: none;
-            border-bottom: 2px solid #667eea;
-            transition: all 0.3s ease;
-        }
-
-        .modal-content a:hover {
-            color: #764ba2;
-            border-bottom-color: #764ba2;
-        }
-
-        @media (max-width: 768px) {
-            .articles-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .modal-content {
-                margin: 20px;
-                padding: 2rem 1.5rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crafted by Jase - Health & Fitness Blog</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    header { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 2rem; text-align: center; }
+    h1 { color: #667eea; font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .subtitle { color: #666; font-size: 1.2rem; }
+    .filter-bar { background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .filter-btn { padding: 0.7rem 1.5rem; border: none; border-radius: 8px; background: #f0f0ff; color: #4a4a8a; cursor: pointer; transition: all 0.2s ease; }
+    .filter-btn:hover { background: #e0e0ff; }
+    .filter-btn.active { background: #667eea; color: white; }
+    .articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+    .article-card { background: white; border-radius: 14px; padding: 1.2rem; box-shadow: 0 6px 20px rgba(0,0,0,0.12); cursor: pointer; display: flex; flex-direction: column; gap: 0.6rem; border: 1px solid rgba(0,0,0,0.05); }
+    .article-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.14); }
+    .article-icon { font-size: 2rem; }
+    .category-tag { display: inline-block; font-size: 0.75rem; background: #eef2ff; color: #4f46e5; padding: 0.25rem 0.5rem; border-radius: 999px; width: fit-content; }
+    .article-title { font-size: 1.2rem; color: #222; }
+    .article-meta { font-size: 0.85rem; color: #666; }
+    .article-excerpt { font-size: 0.95rem; color: #444; }
+    /* Modal */
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); padding: 20px; z-index: 1000; }
+    .modal-content { background: white; max-width: 860px; margin: 40px auto; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-bottom: 1px solid #eee; }
+    .modal-body { padding: 1.25rem; }
+    .close-btn { background: transparent; border: none; font-size: 1.5rem; cursor: pointer; }
+    .modal-body h2 { margin-bottom: 0.5rem; color: #111; }
+    .modal-body h3 { margin-top: 1rem; margin-bottom: 0.5rem; color: #333; }
+    .modal-body p { margin: 0.6rem 0; }
+    .modal-body ul { margin: 0.6rem 1rem; padding-left: 1rem; }
+    .modal-body li { margin: 0.35rem 0; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🏋️ Crafted by Jase</h1>
-            <p class="subtitle">Your Guide to Health, Fitness & Resilient Living</p>
-        </header>
+  <div class="container">
+    <header>
+      <h1>Crafted by Jase</h1>
+      <p class="subtitle">Health, Fitness, Mobility, and Functional Performance</p>
+    </header>
 
-        <div class="filter-bar">
-            <button class="filter-btn active" data-category="all">All Posts</button>
-            <button class="filter-btn" data-category="nutrition">Nutrition</button>
-            <button class="filter-btn" data-category="training">Training</button>
-            <button class="filter-btn" data-category="rehab">Rehab & Prehab</button>
-            <button class="filter-btn" data-category="tactical">Tactical Fitness</button>
-        </div>
-
-        <div class="articles-grid" id="articlesGrid"></div>
+    <div class="filter-bar">
+      <button class="filter-btn active" data-category="all">All</button>
+      <button class="filter-btn" data-category="health">Health</button>
+      <button class="filter-btn" data-category="fitness">Fitness</button>
+      <button class="filter-btn" data-category="mobility">Mobility</button>
+      <button class="filter-btn" data-category="mindset">Mindset</button>
     </div>
 
-    <div class="modal" id="articleModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div id="modalBody"></div>
+    <section class="articles-grid" id="articlesGrid"></section>
+
+    <div id="articleModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <strong>Article</strong>
+          <button class="close-btn" onclick="closeModal()">×</button>
         </div>
+        <div id="modalBody" class="modal-body"></div>
+      </div>
     </div>
+  </div>
 
-    <script>
-        // ... other JS ...
-        const articles = [
-            {
-                id: 1,
-                title: "Building Resilient Movement Patterns",
-                category: "rehab",
-                date: "2025-10-19",
-                excerpt: "Discover how proper movement patterns can prevent injury and enhance performance across all aspects of life.",
-                icon: "🏃",
-                author: "Jase Porter",
-                content: `
-                    <h2>Building Resilient Movement Patterns</h2>
-                    <h3>Why Movement Patterns Matter</h3>
-                    <p>Movement quality is the foundation of performance and injury prevention. As a coach certified by The Ready State, 102 Movement & Mobility, and Pain Free Performance Specialist (PPSC), I use the latest functional assessments and corrective protocols endorsed by leaders like Kelly Starrett and Dr. John Rusin. Poor patterns lead to joint pain and dysfunction, while resilient movement fortifies tissue health and athletic longevity.</p>
-                    <h3>The Seven Fundamental Patterns (PPSC & Ready State)</h3>
-                    <ul>
-                        <li><strong>Squat:</strong> Lower body power, everyday tasks</li>
-                        <li><strong>Hinge:</strong> Posterior chain, picking up objects</li>
-                        <li><strong>Lunge:</strong> Single-leg stability, gait mechanics</li>
-                        <li><strong>Push:</strong> Upper body pressing</li>
-                        <li><strong>Pull:</strong> Back strength, posture</li>
-                        <li><strong>Carry:</strong> Core and grip strength for daily loads</li>
-                        <li><strong>Rotation:</strong> Safe twisting, anti-rotation stability</li>
-                    </ul>
-                    <h3>How to Build Resilience</h3>
-                    <ul>
-                        <li>Master the basics first. Start with bodyweight; progress gradually.</li>
-                        <li>Assess movement regularly. Use coach-led screens (FRC, Ready State Mobility 101) to spot and fix compensation early.</li>
-                        <li>Integrate mobility, not just flexibility. Active control is more protective than passive range.</li>
-                        <li>Use loaded carries, anti-rotation, and multi-planar drills. Research shows these build whole-body resilience for tactical, farm, and athletic populations.</li>
-                    </ul>
-                    <h3>Learn More</h3>
-                    <ul>
-                        <li><a href="https://thereadystate.com/product/movement-and-mobility-101-102-bundle-october-2025/" target="_blank">Read The Ready State's Mobility 101 Guides</a></li>
-                        <li><a href="https://drjohnrusin.com/ppsc/" target="_blank">See Pain Free Performance Science by Dr. Rusin</a></li>
-                    </ul>
-                    <h3>Call to Action</h3>
-                    <p>
-                        Ready for a free movement assessment? <a href="https://craftedbyjase.setmore.com/" target="_blank">Book a consult</a> now—let's identify and fix your barriers to pain-free living!<br>
-                        Want weekly updates with advanced drills, guides, and exclusive coaching tips? Subscribe below and join the #MovementResilience community!
-                    </p>
-                `
-            },
-            // ... remaining articles ...
-        ];
-        // ... rest of JS ...
+  <script>
+    const articles = [
+      {
+        id: 1,
+        title: "Foundations of Functional Fitness",
+        category: "fitness",
+        date: "2025-10-01",
+        excerpt: "A practical blueprint to build durable strength, capacity, and movement literacy.",
+        icon: "🏋️‍♂️",
+        author: "Jase Porter",
+        content: `
+          <h2>Foundations of Functional Fitness</h2>
+          <p>The core of functional fitness is not about chasing numbers—it's about building a capable, resilient human. Start with movement quality, then add load, speed, and complexity.</p>
+          <ul>
+            <li>Master the basics: squat, hinge, push, pull, carry.</li>
+            <li>Train across planes: sagittal, frontal, transverse.</li>
+            <li>Blend strength, aerobic base, and mobility work.</li>
+          </ul>
+          <h3>Call to Action</h3>
+          <p>
+            Ready for a free movement assessment? <a href="https://craftedbyjase.setmore.com/" target="_blank">Book a consult</a> now—let's identify and fix your barriers to pain-free living!<br/>
+            Want weekly updates with advanced drills, guides, and exclusive coaching tips? Subscribe below and join the #MovementResilience community!
+          </p>
+        `
+      },
 
-        function renderArticles(category = 'all') {
-            const grid = document.getElementById('articlesGrid');
-            const filtered = category === 'all' 
-                ? articles 
-                : articles.filter(a => a.category === category);
-            
-            grid.innerHTML = filtered.map(article => `
-                <div class="article-card" onclick="openModal(${article.id})">
-                    <div class="article-icon">${article.icon}</div>
-                    <span class="category-tag">${article.category}</span>
-                    <h2 class="article-title">${article.title}</h2>
-                    <div class="article-meta">${article.author} • ${article.date}</div>
-                    <p class="article-excerpt">${article.excerpt}</p>
-                </div>
-            `).join('');
-        }
+      {
+        id: 3,
+        title: "The Science of Recovery",
+        category: "fitness",
+        date: "2025-10-14",
+        excerpt: "Understanding the physiological and psychological aspects of effective recovery strategies.",
+        icon: "🛌",
+        author: "Jase Porter",
+        content: `
+            <h2>The Science of Recovery</h2>
+            <h3>Why Recovery Matters</h3>
+            <p>Recovery is when progress happens. Every workout, adventure, or mission only triggers adaptation if recovery is prioritized. Modern science now recognizes recovery as the linchpin of long-term health, resilience, and performance.</p>
+            <h3>Evidence-Based Strategies</h3>
+            <ul>
+                <li><strong>Active Recovery:</strong> Incorporate low-intensity walking, cycling, or mobility work on rest days.</li>
+                <li><strong>Mobility & Soft Tissue:</strong> Use tools like foam rollers or The Ready State protocols for targeted self-care.</li>
+                <li><strong>Sleep Optimization:</strong> Aim for 7–9 hours per night. Establish wind-down routines to maximize deep rest.</li>
+                <li><strong>Nutrition:</strong> Refuel with protein and healthy carbs after training; add antioxidant-rich foods for cellular repair.</li>
+                <li><strong>Mindful Rest:</strong> Add short breathing exercises, meditation, or mindful immersion (nature Rx) to support nervous system reset.</li>
+            </ul>
+            <h3>Pro Tips & Science Updates</h3>
+            <ul>
+                <li>Alternate hot and cold for muscle recovery (contrast bathing).</li>
+                <li>Track soreness levels with simple daily logs or phone apps.</li>
+                <li>Stretch, roll, or move gently for 5–10 minutes before bed.</li>
+            </ul>
+            <h3>Recommended Resources</h3>
+            <ul>
+                <li><a href="https://thereadystate.com/blogs/welcome-to-the-ready-state/" target="_blank">Ready State Blog</a> on mobility and recovery</li>
+                <li><a href="https://www.ptpioneer.com/personal-training/certifications/study/periodization/" target="_blank">Guide to Periodization Science</a></li>
+            </ul>
+            <h3>Call to Action</h3>
+            <p>
+                Need help building your ideal recovery routine? <a href="https://craftedbyjase.setmore.com/" target="_blank">Start with a coaching call</a>.<br>
+                Subscribe for pro recovery tips, challenges, and exclusive offers for your next 21-Day Reset.
+            </p>
+        `
+      }
 
-        function openModal(id) {
-            const article = articles.find(a => a.id === id);
-            document.getElementById('modalBody').innerHTML = article.content;
-            document.getElementById('articleModal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
+      // ... remaining articles ...
+    ];
 
-        function closeModal() {
-            document.getElementById('articleModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
+    // Rendering
+    function renderArticles(category = 'all') {
+      const grid = document.getElementById('articlesGrid');
+      const filtered = category === 'all' ? articles : articles.filter(a => a.category === category);
+      grid.innerHTML = filtered.map(article => `
+        <div class="article-card" onclick="openModal(${article.id})">
+          <div class="article-icon">${article.icon}</div>
+          <span class="category-tag">${article.category}</span>
+          <h2 class="article-title">${article.title}</h2>
+          <div class="article-meta">${article.author} • ${article.date}</div>
+          <p class="article-excerpt">${article.excerpt}</p>
+        </div>
+      `).join('');
+    }
 
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                renderArticles(this.dataset.category);
-            });
-        });
+    function openModal(id) {
+      const article = articles.find(a => a.id === id);
+      document.getElementById('modalBody').innerHTML = article.content;
+      document.getElementById('articleModal').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
 
-        window.onclick = function(event) {
-            const modal = document.getElementById('articleModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
+    function closeModal() {
+      document.getElementById('articleModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
 
-        renderArticles();
-    </script>
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderArticles(this.dataset.category);
+      });
+    });
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('articleModal');
+      if (event.target === modal) { closeModal(); }
+    }
+
+    renderArticles();
+  </script>
 </body>
 </html>
